@@ -1,16 +1,20 @@
 .appHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     &__btns {
         display: flex;
         gap: 10px;
+        margin-left: 10px;
     }
     &__btn {
-        width: 170px;
-        height: 40px;
+        width: 100px;
+        height: 30px;
         border-radius: 9px;
         border: none;
         background: #efeef8;
         color: #5553ad;
-        font-size: 14px;
+        font-size: 12px;
         cursor: pointer;
     }
 }

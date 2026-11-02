@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import Categories from '../Categories/Categories';
+import SortWidget from '../SortWidget/SortWidget';
 import FilteredList from '../FilteredList/FilteredList';
 import './listWidget.scss';
 
@@ -41,7 +42,7 @@ const ListWidget = ({list}) => {
             <div className="listWidget__title">{list.name} in Different Languages</div>
 
             <div className="listWidget__categories">
-                <Categories onSortAToZ={sortByCountryNameAZ} onSortZToA={sortByCountryZA}/>
+                <SortWidget onSortAToZ={sortByCountryNameAZ} onSortZToA={sortByCountryZA}/>
             </div>
             <div className="listWidget__filteredList">
                 <FilteredList translation={translationList} style={style} />

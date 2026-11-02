@@ -1,0 +1,27 @@
+.searcher {
+    display: flex;
+    justify-content: center;
+    &__form {
+        display: flex;
+        gap: 7px;
+    }
+    &__categories{
+        width: 230px;
+    }
+    &__input {
+        width: 300px;
+        height: 40px;
+        border-radius: 9px;
+        border: none;
+    }
+    &__btn {
+        width: 60px;
+        height: 40px;
+        border-radius: 9px;
+        border: none;
+        background: #efeef8;
+        color: #5553ad;
+        font-size: 14px;
+        cursor: pointer;
+    }
+}
