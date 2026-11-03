@@ -22,7 +22,7 @@ const Searcher = ({onFilter}) => {
                     onFilter(values, 0);
                 }}
             >
-            {({ isSubmitting }) => (
+            {({ isSubmitting, resetForm, initialValues }) => (
                 <Form className='searcher__form'>
                     <FormObserver onFilter={onFilter}/>
                     <Field className="searcher__input" type="text" name="text" />
@@ -57,6 +57,16 @@ const Searcher = ({onFilter}) => {
 
                     <button className='searcher__btn' type="submit" disabled={isSubmitting}>
                         Search
+                    </button>
+                    <button 
+                        className='searcher__btn' 
+                        type="button" 
+                        onClick={() => {
+                            resetForm(); 
+                            onFilter(initialValues, 0); 
+                        }}
+                    >
+                        Reset
                     </button>
                 </Form>
             )}
