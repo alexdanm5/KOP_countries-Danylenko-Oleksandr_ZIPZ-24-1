@@ -79,7 +79,7 @@ const CardList = () => {
             <div className="widgetsLayout__wrapper">
                 {errorMessage}
                 {spinner}
-                {sortedData.map((item, i) => (
+                {loading ? null : sortedData.map((item, i) => (
                     <Card key={i} country={item}/>
                 ))}   
             </div>
