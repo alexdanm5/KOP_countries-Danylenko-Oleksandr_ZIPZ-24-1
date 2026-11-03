@@ -4,7 +4,7 @@ import Searcher from '../Searcher/Searcher';
 
 import './appHeader.scss'
 
-const AppHeader = ({sortAToZ, sortZToA, sortByArea}) => {
+const AppHeader = ({filter,sortAToZ, sortZToA, sortByArea}) => {
 
     const BUTTONS = [
         { id: 'nameAsc', label: 'Sort by country A-Z', fn: sortAToZ },
@@ -16,7 +16,7 @@ const AppHeader = ({sortAToZ, sortZToA, sortByArea}) => {
     return (
         <div className='appHeader'>
             <div className='appHeader__search'>
-                <Searcher/>
+                <Searcher onFilter={filter}/>
             </div>
             <div className='appHeader__btns'>
                 {BUTTONS.map((btn) => (

@@ -16,11 +16,12 @@ const CardList = () => {
 
     
 
-    const {loading, error, getAllCountries} = useCountriesService();
+    const {loading, error, getAllCountries, getFilteredCountries} = useCountriesService();
 
     useEffect(() => {
         onRequest(offset, true);
     }, [])
+
 
     const onRequest = (offset) => {
         getAllCountries(offset)
@@ -28,8 +29,13 @@ const CardList = () => {
 
     }
 
+    const onFilteredRequest = (formValues, offset) => {
+        getFilteredCountries(formValues, offset)
+            .then(onCountriesListLoaded)
+    }
+
     const onCountriesListLoaded = (newCountriesList) => {
-        setCountriesList([...countriesList, ...newCountriesList]);
+        setCountriesList(newCountriesList);
     }
 
     const sortedData = [...countriesList].sort((a, b) => { 
@@ -68,7 +74,7 @@ const CardList = () => {
 
     return (
         <div className="widgetsLayout">
-            <AppHeader sortAToZ={sortAToZ} sortZToA={sortZToA} sortByArea={sortByArea}/>
+            <AppHeader filter={onFilteredRequest} sortAToZ={sortAToZ} sortZToA={sortZToA} sortByArea={sortByArea}/>
 
             <div className="widgetsLayout__wrapper">
                 {errorMessage}
