@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 
 import './cardHeader.scss'
 
@@ -37,6 +38,9 @@ const CardHeader = ({countryHeader}) => {
                     <div className="info__years">gini cofficiente</div>
                 </div>)
             }
+            <Link to={`/country/${name}`} className="info__btn">
+                Read More
+            </Link>
         </div>
             
     )

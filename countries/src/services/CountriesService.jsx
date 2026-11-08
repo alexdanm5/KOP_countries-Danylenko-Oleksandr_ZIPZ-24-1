@@ -32,7 +32,6 @@ const useCountriesService = () => {
 				params.append(`memberships.${filter}`, '1');
 			});
 		}
-		console.log(`${_apiBase}?${params.toString()}&limit=${_baseLimit}&offset=${offset}`);
 
 		const res = await request(
 			`${_apiBase}?${params.toString()}&limit=${_baseLimit}&offset=${offset}`
@@ -45,7 +44,7 @@ const useCountriesService = () => {
 			name: country.names.common,
             region: country.region || "There is no region",
             flag: country.flag.url_png || null,
-			description: country.descriptions.long || "There is no description",
+			description: country.descriptions.short || "There is no description",
             gini: country.economy.gini_coefficient,
             area: country.area,
             borders: country.borders,

@@ -2,10 +2,10 @@ import { useState } from 'react'
 import {BrowserRouter as Router, Route, Routes} from 'react-router';
 
 import CardList from '../CardList/CardList'
+import CountryDetail from '../CountryDetails/CountryDetails'
 
 
 const App = () => {
-  const [count, setCount] = useState(0)
 
   return (
     <div className="app">
@@ -13,9 +13,9 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<CardList />} />
         </Routes>
-        {/* <Routes>
-          <Route exact path="/country/:name" element={<CountryDetail />} />
-        </Routes> */}
+        <Routes>
+          <Route exact path="/country" element={<CountryDetail />} />
+        </Routes>
       </Router>
     </div>
   )
