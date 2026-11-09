@@ -1,4 +1,5 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect, createContext } from 'react'
+import { FilterContext } from '../../context/FilterContext'
 import useCountriesService from '../../services/CountriesService'
 import Spinner from '../Spinner/Spinner'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
@@ -7,6 +8,7 @@ import AppHeader from '../AppHeader/AppHeader';
 import Card from '../Card/Card'
 
 import './cardList.scss'
+
 
 const CardList = () => {
     const [countriesList, setCountriesList] = useState([]);
@@ -73,18 +75,25 @@ const CardList = () => {
     const spinner = loading ? <Spinner/> : null;
 
     return (
-        <div className="widgetsLayout">
-            <AppHeader filter={onFilteredRequest} sortAToZ={sortAToZ} sortZToA={sortZToA} sortByArea={sortByArea}/>
+        <FilterContext.Provider value={{ 
+            onFilter: onFilteredRequest, 
+            sortAToZ, 
+            sortZToA, 
+            sortByArea 
+        }}>
+            <div className="widgetsLayout">
+                
+                <AppHeader /> 
 
-            <div className="widgetsLayout__wrapper">
-                {errorMessage}
-                {spinner}
-                {loading ? null : sortedData.map((item, i) => (
-                    <Card key={i} country={item}/>
-                ))}   
+                <div className="widgetsLayout__wrapper">
+                    {errorMessage}
+                    {spinner}
+                    {loading ? null : sortedData.map((item, i) => (
+                        <Card key={i} country={item}/>
+                    ))}   
+                </div>
             </div>
-            
-        </div>
+        </FilterContext.Provider>
     )
 }
 

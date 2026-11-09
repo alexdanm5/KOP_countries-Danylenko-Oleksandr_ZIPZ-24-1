@@ -1,10 +1,16 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { FilterContext } from '../../context/FilterContext';
+import { ThemeContext } from '../../context/ThemeContext';
 
 import Searcher from '../Searcher/Searcher';
 
 import './appHeader.scss'
 
-const AppHeader = ({filter,sortAToZ, sortZToA, sortByArea}) => {
+const AppHeader = () => {
+
+    const { sortAToZ, sortZToA, sortByArea } = useContext(FilterContext);
+
+    const { theme, toggleTheme } = useContext(ThemeContext);
 
     const BUTTONS = [
         { id: 'nameAsc', label: 'Sort by country A-Z', fn: sortAToZ },
@@ -15,9 +21,14 @@ const AppHeader = ({filter,sortAToZ, sortZToA, sortByArea}) => {
     
     return (
         <div className='appHeader'>
+            <button onClick={toggleTheme} className="appHeader__btn" style={{marginBottom: '10px'}}>
+                {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
+            </button>
+
             <div className='appHeader__search'>
-                <Searcher onFilter={filter}/>
+                <Searcher />
             </div>
+            
             <div className='appHeader__btns'>
                 {BUTTONS.map((btn) => (
                     <button
@@ -29,7 +40,6 @@ const AppHeader = ({filter,sortAToZ, sortZToA, sortByArea}) => {
                     </button>
                 ))}
             </div>
-            
         </div>
     )
 }

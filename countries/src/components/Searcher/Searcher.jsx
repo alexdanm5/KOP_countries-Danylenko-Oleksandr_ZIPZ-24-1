@@ -1,10 +1,14 @@
+import { useContext } from 'react';
+import { FilterContext } from '../../context/FilterContext';
+
 import {Formik, Form, Field} from 'formik'
 import Categories from '../Categories/Categories';
 import FormObserver from '../FormObserver/FormObserver';
 
 import './searcher.scss'
 
-const Searcher = ({onFilter}) => {
+const Searcher = () => {
+    const { onFilter } = useContext(FilterContext);
     const CHECKBOXES = [
         {id: 1, type: "checkbox", name: "g20", label: "Are members of the G20"},
         {id: 2, type: "checkbox", name: "g7", label: "Are members of the G7"},

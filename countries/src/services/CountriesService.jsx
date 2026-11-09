@@ -39,16 +39,27 @@ const useCountriesService = () => {
 		return res.data.objects.map(_transformCountries);
 	};
 
+	const getCountry = async (name) => {
+		const res = await request(`${_apiBase}?names.common=${name}`);
+		return _transformCountries(res.data.objects[0]);
+	};
+
     const _transformCountries = (country) => {
 		return {
 			name: country.names.common,
+			officialName: country.names.official,
             region: country.region || "There is no region",
+			subregion: country.subregion || "There is no subregion",
             flag: country.flag.url_png || null,
 			description: country.descriptions.short || "There is no description",
+			longDescription: country.descriptions.long || "There is no long description",
             gini: country.economy.gini_coefficient,
             area: country.area,
             borders: country.borders,
-            translations: country.names.translations
+            translations: country.names.translations,
+			population: country.population,
+			currencies: country.currencies.map(currency => `${currency.name} (${currency.symbol})`).join(', '),
+			governmentType: country.government_type || "There is no government type",
 		};
 	};
 
@@ -57,7 +68,8 @@ const useCountriesService = () => {
 		error,
 		clearError,
         getAllCountries,
-		getFilteredCountries
+		getFilteredCountries,
+		getCountry
 	};
 }
 

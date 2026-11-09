@@ -10,7 +10,7 @@ export const useHttp = () => {
 
         try {
             const headers = {
-                'Authorization': 'Bearer rc_live_c075933979ba4aea8261ee3c84a4d3da',
+                'Authorization': 'Bearer rc_live_92d68a9370f64bec8a789a299839c914',
                 ...customHeaders
             };
             const response = await fetch(url, {method, body, headers});

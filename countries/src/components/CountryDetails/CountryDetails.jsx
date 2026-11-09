@@ -15,10 +15,15 @@ const CountryDetails = () => {
 
     const {loading, error, getCountry} = useCountriesService();
 
+
     useEffect(() => {
-        getCountry()
-            .then(onCountryLoaded);
+        onRequest(name);
     }, [name]); 
+
+    const onRequest = (name) => {
+        getCountry(name)
+            .then(onCountryLoaded);
+    }
 
     const onCountryLoaded = (countryData) => {
         setCountry(countryData);
@@ -27,8 +32,10 @@ const CountryDetails = () => {
     const errorMessage = error ? <ErrorMessage/> : null;
     const spinner = loading ? <Spinner/> : null;
 
-
-    // if (!country) return <div>Country not found</div>;
+    if (loading) return <div className="details">{spinner}</div>;
+    if (error) return <div className="details">{errorMessage}</div>;
+    
+    if (!country) return <div className="details"><button onClick={() => navigate(-1)} className="details__btn">← Go Back</button></div>;  
 
     return (
         
@@ -37,29 +44,23 @@ const CountryDetails = () => {
                 ← Go Back
             </button>
 
-            {errorMessage}
-            {spinner}
-            
-            {loading? null : 
-                <>
                     <div className="details__header">
-                        <img className="details__img" src="https://flags.restcountries.com/v5/w640/ca.png" alt="Canada" />
+                        <img className="details__img" src={country.flag} alt={country.name} />
                         <div className="details__names">
-                            <h2 className="details__name">Name: Canada</h2>
-                            <h3 className="details__name">Official Name: Canada</h3>
+                            <h2 className="details__name">Name: {country.name}</h2>
+                            <h3 className="details__name">Official Name: {country.officialName}</h3>
                             <div className="details__descr">
-                                Canada is a Commonwealth realm with Ottawa as its capital and English and French as official languages. The Canadian dollar is the currency, and energy, minerals, forestry, manufacturing and services support a mostly southern population.
+                                {country.longDescription}
                             </div>
-                        </div>
+                            </div>
                     </div>
                     <div className="details__info">
-                        <div className="details__text">Region: North America</div>
-                        <div className="details__text">Population: 41798407</div>
-                        <div className="details__text">Currency: Canadian dollar $</div>
-                        <div className="details__text">Government Type: Federal parliamentary constitutional monarchy</div>
+                        <div className="details__text">Region: {country.region}</div>
+                        <div className="details__text">Population: {country.population.toLocaleString()}</div>
+                        <div className="details__text">Currency: {country.currencies}</div>
+                        <div className="details__text">Government Type: {country.governmentType}</div>
                     </div>
-                </>
-            }
+
         </div>
     );
 };
