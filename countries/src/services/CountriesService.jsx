@@ -40,8 +40,21 @@ const useCountriesService = () => {
 	};
 
 	const getCountry = async (name) => {
-		const res = await request(`${_apiBase}?names.common=${name}`);
-		return _transformCountries(res.data.objects[0]);
+		const res = await request(`${_apiBase}?names.common=${name}`); 
+    
+		if (!res.data.objects || res.data.objects.length === 0) {
+			throw new Error('Country not found');
+		}
+
+		const exactCountry = res.data.objects.find(
+			item => item.name.toLowerCase() === name.toLowerCase()
+		);
+
+		if (!exactCountry) {
+			throw new Error('Exact country match not found');
+		}
+
+		return _transformCountries(exactCountry);
 	};
 
     const _transformCountries = (country) => {
